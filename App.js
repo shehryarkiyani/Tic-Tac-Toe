@@ -3,6 +3,10 @@ import React from 'react';
 import { Pressable,StyleSheet, Text,Button ,View,TextInput} from 'react-native';
 
 export default function App() {
+  const [count,setcount]=useState(0)
+  const[total,setTotal]=useState(0)
+  const[result,setresult]=useState("")
+  const [v,setv]=useState(false)
   const[p1,setp1]=useState(true)
   const[p2,setp2]=useState(false)
   const[b1,setb1]=useState("")
@@ -16,6 +20,7 @@ export default function App() {
   const[b9,setb9]=useState("")
   const ButtonClicked=(box,turn)=>{
     if(turn==true){
+      setcount(count+1)
       setp1(false)
       setp2(true)
       if(box==1){
@@ -38,6 +43,7 @@ export default function App() {
         setb9('O')
       }
     }else{
+      setcount(count+1)
 setp1(true)
       setp2(false)
       if(box==1){
@@ -59,9 +65,50 @@ setp1(true)
       }else if(box==9){
         setb9('X')
       }
+    }if(count==8){
+      setTotal(2)
     }
 
   }
+  useEffect(()=>{
+    if(total!=0){
+    if(b1==b2 && b2==b3 && b1=='X'){
+      setresult("Player 2 wins")
+    }else if(b1==b2 && b2==b3 && b1=='O'){
+      setresult("Player 1 wins")
+    }else if(b4==b5 && b5==b6 && b4=='X'){
+      setresult("Player 2 wins")
+    }else if(b4==b5 && b5==b6 && b4=='O'){
+      setresult("Player 1 wins")
+    }else if(b7==b8 && b8==b9 && b7=='X'){
+      setresult("Player 2 wins")
+    }else if(b7==b8 && b8==b9 && b7=='O'){
+      setresult("Player 1 wins")
+    }else if(b1==b4 && b4==b7 && b1=='X'){
+      setresult("Player 2 wins")
+    }else if(b1==b4 && b4==b7 && b1=='O'){
+      setresult("Player 1 wins")
+    }else if(b2==b5 && b5==b8 && b2=='X'){
+      setresult("Player 2 wins")
+    }else if(b2==b5 && b5==b8 && b2=='O'){
+      setresult("Player 1 wins")
+    }else if(b3==b6 && b6==b9 && b3=='X'){
+      setresult("Player 2 wins")
+    }else if(b3==b6 && b6==b9 && b3=='O'){
+      setresult("Player 1 wins")
+    }else if(b1==b5 && b5==b9 && b1=='X'){
+      setresult("Player 2 wins")
+    }else if(b1==b5 && b5==b9 && b1=='O'){
+  setresult("Player 1 wins")
+    }else if(b3==b5 && b5==b7 && b5=='X'){
+  setresult("Player 2 wins")
+    }else if(b3==b5 && b5==b7 && b5=='O'){
+     setresult("Player 1 wins")
+    }else{
+      setresult("Game Drawn")
+    }
+     }
+  },[total])
   return (
     <View style={styles.container}>
     <Text style={styles.st1} >Tic Tac Toe Game</Text>
